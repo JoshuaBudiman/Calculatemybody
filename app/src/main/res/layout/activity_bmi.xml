@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F4F4"
+    android:textAlignment="center"
+    tools:context=".BMICalcActivity">
+
+    <TextView
+        android:id="@+id/textView_CalcBMI"
+        android:layout_width="333dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:fontFamily="@font/abril_fatface"
+        android:text="BMI CALCULATOR"
+        android:textAlignment="center"
+        android:textColor="#7A000000"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Your Weight in Kg"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/editText_weightBMI"
+        app:layout_constraintStart_toStartOf="@+id/textView_CalcBMI" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:layout_marginBottom="2dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Your Height in Cm"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/editText_heightBMI"
+        app:layout_constraintEnd_toEndOf="@+id/textView_weight"
+        app:layout_constraintStart_toStartOf="@+id/textView_weight"
+        app:layout_constraintTop_toBottomOf="@+id/editText_weightBMI" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editText_weightBMI"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:backgroundTint="#332828"
+        android:fontFamily="sans-serif-black"
+        android:textColor="#430606"
+        android:textColorHint="#0B0A0A"
+        app:layout_constraintEnd_toEndOf="@+id/textView_CalcBMI"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textView_CalcBMI"
+        app:layout_constraintTop_toBottomOf="@+id/textView_CalcBMI" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editText_heightBMI"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="sans-serif-black"
+        android:textColor="#430606"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#090808"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/editText_weightBMI"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editText_weightBMI"
+        app:layout_constraintTop_toBottomOf="@+id/editText_weightBMI" />
+
+    <android.widget.Button
+        android:id="@+id/button_calculateBMI"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/button_bg"
+        android:fontFamily="sans-serif-black"
+        android:text="Calculate"
+        android:textColor="#FDFCFC"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/editText_heightBMI"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/editText_heightBMI"
+        app:layout_constraintTop_toBottomOf="@+id/editText_heightBMI" />
+
+    <TextView
+        android:id="@+id/textView_outputBMI"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:fontFamily="sans-serif-medium"
+        android:textAlignment="center"
+        android:textColor="#7E2019"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView_CalcBMI"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView_CalcBMI"
+        app:layout_constraintTop_toBottomOf="@+id/button_calculateBMI" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
