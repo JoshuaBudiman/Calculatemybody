@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BMRCalcActivity extends AppCompatActivity {
 
@@ -40,16 +41,19 @@ public class BMRCalcActivity extends AppCompatActivity {
                 String weight = editText_weightBMR.getText().toString();
                 String height = editText_heightBMR.getText().toString();
                 String age = editText_ageBMR.getText().toString();
-                float nilaiBMR;
+                float nilaiBMR=0;
                 int resultBMR;
                 if (TextUtils.isEmpty(age)) {
                     editText_ageBMR.setError("Please enter your age");
+                    return;
                 }
                 if (TextUtils.isEmpty(weight)) {
                     editText_weightBMR.setError("Please enter your weight");
+                    return;
                 }
                 if (TextUtils.isEmpty(height)) {
                     editText_heightBMR.setError("Please enter your height");
+                    return;
                 }
 
                 float weight1 = Float.parseFloat(weight);
@@ -58,15 +62,19 @@ public class BMRCalcActivity extends AppCompatActivity {
 
                 if (radioButton_maleBMR.isChecked()) {
                     nilaiBMR = (float) (66.5 + (weight1 * 13.7) + (5 * height1) - (6.8 * age1));
-                    resultBMR = Math.round(nilaiBMR);
-                    textView_outputBMR.setText("Your minimum daily calorie requirement is " + resultBMR +" calorie");
-
                 }  else if (radioButton_femaleBMR.isChecked()) {
                     nilaiBMR = (float) (655 + (9.6 * weight1) + (1.8 * height1) - (4.7 * age1));
+                }else {
+                    Toast.makeText(getApplicationContext(), "Please select a gender", Toast.LENGTH_SHORT).show();
+                }
+
+                if (radioButton_maleBMR.isChecked()|| radioButton_femaleBMR.isChecked() && !age.isEmpty() && !height.isEmpty() && !weight.isEmpty()){
                     resultBMR = Math.round(nilaiBMR);
                     textView_outputBMR.setText("Your minimum daily calorie requirement is " + resultBMR +" calorie");
-
+                }else{
+                    Toast.makeText(getApplicationContext(), "Please fill in all the data", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
     }

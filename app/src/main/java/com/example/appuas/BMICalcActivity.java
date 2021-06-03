@@ -4,13 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BMICalcActivity  extends AppCompatActivity {
 
     private EditText editText_weightBMI,editText_heightBMI;
     private TextView TextView_outputBMI;
+    private Button button_calculateBMI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +23,9 @@ public class BMICalcActivity  extends AppCompatActivity {
         editText_weightBMI = findViewById(R.id.editText_weightBMI);
         editText_heightBMI = findViewById(R.id.editText_heightBMI);
         TextView_outputBMI = findViewById(R.id.textView_outputBMI);
+        button_calculateBMI =findViewById(R.id.button_calculateBMI);
 
-        findViewById(R.id.button_calculateBMI).setOnClickListener(new View.OnClickListener() {
+        button_calculateBMI.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -42,7 +46,12 @@ public class BMICalcActivity  extends AppCompatActivity {
                 float nilaiBMI = calculateBMI(weight1, height1);
                 String diagnosa = DiagnosaBMI(nilaiBMI);
 
-                TextView_outputBMI.setText(nilaiBMI + " - " + diagnosa);
+                if (!TextUtils.isEmpty(weight) && !TextUtils.isEmpty(height)){
+                    TextView_outputBMI.setText(nilaiBMI + " - " + diagnosa);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Please fill in all the data", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }
