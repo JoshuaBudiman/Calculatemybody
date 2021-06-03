@@ -11,11 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 public class TDEECalcActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private RadioButton radioButton_male_tdee,radioButton_female_tdee;
-    private EditText editText_ageTDEE,editText_weightTDEE,editText_heightTDEE;
+    private TextInputLayout textInputLayout_ageTdee,textInputLayout_weightTdee,textInputLayout_heightTdee;
     private Spinner spinner_tdee;
     private Button button_calculateTDEE;
 
@@ -27,9 +30,9 @@ public class TDEECalcActivity extends AppCompatActivity implements AdapterView.O
 
         radioButton_male_tdee = findViewById(R.id.radioButton_male_tdee);
         radioButton_female_tdee = findViewById(R.id.radioButton_female_tdee);
-        editText_ageTDEE = findViewById(R.id.editText_ageTDEE);
-        editText_weightTDEE = findViewById(R.id.editText_weightTDEE);
-        editText_heightTDEE = findViewById(R.id.editText_heightTDEE);
+        textInputLayout_ageTdee = findViewById(R.id.textInputLayout_ageTdee);
+        textInputLayout_weightTdee = findViewById(R.id.textInputLayout_weightTdee);
+        textInputLayout_heightTdee = findViewById(R.id.textInputLayout_heightTdee);
         button_calculateTDEE = findViewById(R.id.button_calculateTDEE);
         spinner_tdee = findViewById(R.id.spinner_tdee);
 
@@ -41,9 +44,9 @@ public class TDEECalcActivity extends AppCompatActivity implements AdapterView.O
         button_calculateTDEE.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String weight = editText_weightTDEE.getText().toString().trim();
-                String height = editText_heightTDEE.getText().toString().trim();
-                String age = editText_ageTDEE.getText().toString().trim();
+                String weight = textInputLayout_weightTdee.getEditText().getText().toString().trim();
+                String height = textInputLayout_heightTdee.getEditText().getText().toString().trim();
+                String age = textInputLayout_ageTdee.getEditText().getText().toString().trim();
                 String act = spinner_tdee.getSelectedItem().toString();
                 float nilaiact = CekActivity(act);
                 float berat = Float.parseFloat(weight);
@@ -59,6 +62,22 @@ public class TDEECalcActivity extends AppCompatActivity implements AdapterView.O
                     nilaiTDEE = (float) (66.5 + (berat * 13.7) + (5 * tinggi) - (6.8 * umur)) * nilaiact;
                 }else if (radioButton_female_tdee.isChecked()){
                     nilaiTDEE = (float) (655 + (9.6 * berat) + (1.8 * tinggi) - (4.7 * umur)* nilaiact);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Please select a gender", Toast.LENGTH_SHORT).show();
+                }
+                if (weight.isEmpty()){
+                    textInputLayout_weightTdee.setError("Please fill the weight column");
+                }else {
+                    textInputLayout_weightTdee.setError("");
+                }
+                if (height.isEmpty()){
+                    textInputLayout_heightTdee.setError("Please fill the height column");
+                }else {
+                    textInputLayout_heightTdee.setError("");
+                }if (age.isEmpty()){
+                    textInputLayout_ageTdee.setError("Please fill the age column");
+                }else {
+                    textInputLayout_ageTdee.setError("");
                 }
                 resultTDEE = Math.round(nilaiTDEE);
                 loseTDEE = (int) (resultTDEE - (resultTDEE*0.2));
@@ -76,6 +95,8 @@ public class TDEECalcActivity extends AppCompatActivity implements AdapterView.O
                     intent.putExtra("WeightGainMin", WeightGainMin);
                     intent.putExtra("WeightGainMax", WeightGainMax);
                     startActivity(intent);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Please fill in all the data", Toast.LENGTH_SHORT).show();
                 }
             }
         });

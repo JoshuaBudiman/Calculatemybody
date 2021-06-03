@@ -28,7 +28,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textInputLayout6"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout_heightTdee"
                 app:layout_constraintTop_toBottomOf="@+id/divider6"
                 />
 
@@ -69,12 +69,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout1"
+                android:id="@+id/textInputLayout_ageTdee"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="80dp"
+                app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/divider"
                 app:layout_constraintTop_toBottomOf="@+id/radioGroup">
@@ -94,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="32dp"
                 android:fontFamily="@font/abril_fatface"
                 android:text="WEIGHT"
                 android:textSize="24sp"
@@ -102,15 +103,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout4"
+                android:id="@+id/textInputLayout_weightTdee"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="80dp"
+                app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/divider"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout1">
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout_ageTdee">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editText_weightTDEE"
@@ -135,13 +137,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/divider5" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout6"
+                android:id="@+id/textInputLayout_heightTdee"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                app:layout_constraintEnd_toEndOf="@+id/textInputLayout4"
-                app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout_weightTdee"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout_weightTdee"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout_weightTdee">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editText_heightTDEE"
@@ -184,7 +187,7 @@
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/abril_fatface"
                 android:text="ACTIVITY"
@@ -202,9 +205,9 @@
                 android:textColor="#FF1744"
                 android:textSize="18sp"
                 android:textStyle="italic"
-                app:layout_constraintBottom_toBottomOf="@+id/textInputLayout1"
+                app:layout_constraintBottom_toBottomOf="@+id/textInputLayout_ageTdee"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textInputLayout1" />
+                app:layout_constraintStart_toEndOf="@+id/textInputLayout_ageTdee" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -215,7 +218,7 @@
                 android:textColor="#FF1744"
                 android:textSize="18sp"
                 android:textStyle="italic"
-                app:layout_constraintBottom_toBottomOf="@+id/textInputLayout4"
+                app:layout_constraintBottom_toBottomOf="@+id/textInputLayout_weightTdee"
                 app:layout_constraintEnd_toEndOf="@+id/textView4"
                 app:layout_constraintStart_toStartOf="@+id/textView4" />
 
@@ -259,7 +262,7 @@
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout1" />
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout_ageTdee" />
 
             <View
                 android:id="@+id/divider5"
@@ -269,7 +272,7 @@
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout_weightTdee" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -279,7 +282,7 @@
                 android:text="cm"
                 android:textColor="#FF1744"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textInputLayout6"
+                app:layout_constraintBottom_toBottomOf="@+id/textInputLayout_heightTdee"
                 app:layout_constraintEnd_toEndOf="@+id/textView9"
                 app:layout_constraintStart_toStartOf="@+id/textView9" />
 
@@ -291,7 +294,7 @@
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout_heightTdee" />
 
             <android.widget.Button
                 android:id="@+id/button_calculateTDEE"
