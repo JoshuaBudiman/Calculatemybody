@@ -2,7 +2,9 @@ package com.example.appuas;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +21,6 @@ public class BMICalcActivity  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bmi);
-        getSupportActionBar().setTitle("Calculate My Body");
         editText_weightBMI = findViewById(R.id.editText_weightBMI);
         editText_heightBMI = findViewById(R.id.editText_heightBMI);
         TextView_outputBMI = findViewById(R.id.textView_outputBMI);
@@ -29,28 +30,63 @@ public class BMICalcActivity  extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                String weight = editText_weightBMI.getText().toString();
-                String height = editText_heightBMI.getText().toString();
+                String weight = editText_weightBMI.getText().toString().trim();
+                String height = editText_heightBMI.getText().toString().trim();
+                
 
-                if (TextUtils.isEmpty(weight)) {
-                    editText_weightBMI.setError("Please enter your weight");
-                    return;
-                }
-                if (TextUtils.isEmpty(height)) {
-                    editText_heightBMI.setError("Please enter your height");
-                    return;
-                }
-                float weight1 = Float.parseFloat(weight);
-                float height1 = Float.parseFloat(height) / 100;
+                if (!weight.isEmpty() && !height.isEmpty()){
+                    float weight1 = Float.parseFloat(weight);
+                    float height1 = Float.parseFloat(height) / 100;
 
-                float nilaiBMI = calculateBMI(weight1, height1);
-                String diagnosa = DiagnosaBMI(nilaiBMI);
+                    float nilaiBMI = calculateBMI(weight1, height1);
+                    String diagnosa = DiagnosaBMI(nilaiBMI);
 
-                if (!TextUtils.isEmpty(weight) && !TextUtils.isEmpty(height)){
                     TextView_outputBMI.setText(nilaiBMI + " - " + diagnosa);
                 }else{
                     Toast.makeText(getApplicationContext(), "Please fill in all the data", Toast.LENGTH_SHORT).show();
                 }
+
+            }
+        });
+        editText_weightBMI.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String weight = editText_weightBMI.getText().toString().trim();
+                if (weight.isEmpty()) {
+                    editText_weightBMI.setError("Please enter your weight");
+                }else{
+                    editText_weightBMI.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        editText_heightBMI.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String height = editText_heightBMI.getText().toString().trim();
+                if (height.isEmpty()) {
+                    editText_heightBMI.setError("Please enter your height");
+                }else{
+                    editText_heightBMI.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });
