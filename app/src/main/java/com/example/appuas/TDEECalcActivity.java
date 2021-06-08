@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,6 +39,7 @@ public class TDEECalcActivity extends AppCompatActivity implements AdapterView.O
         button_calculateTDEE = findViewById(R.id.button_calculateTDEE);
         spinner_tdee = findViewById(R.id.spinner_tdee);
 
+
         String[] activity_text = getResources().getStringArray(R.array.exercise);
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, activity_text);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -48,47 +52,34 @@ public class TDEECalcActivity extends AppCompatActivity implements AdapterView.O
                 String height = textInputLayout_heightTdee.getEditText().getText().toString().trim();
                 String age = textInputLayout_ageTdee.getEditText().getText().toString().trim();
                 String act = spinner_tdee.getSelectedItem().toString();
-                float nilaiact = CekActivity(act);
-                float berat = Float.parseFloat(weight);
-                float tinggi = Float.parseFloat(height);
-                float umur = Float.parseFloat(age);
-                float nilaiTDEE =0;
-                int resultTDEE;
-                int loseTDEE;
-                int GainMinTDEE;
-                int GainMaxTDEE;
 
-                if (radioButton_male_tdee.isChecked()){
-                    nilaiTDEE = (float) (66.5 + (berat * 13.7) + (5 * tinggi) - (6.8 * umur)) * nilaiact;
-                }else if (radioButton_female_tdee.isChecked()){
-                    nilaiTDEE = (float) (655 + (9.6 * berat) + (1.8 * tinggi) - (4.7 * umur)* nilaiact);
-                }else{
-                    Toast.makeText(getApplicationContext(), "Please select a gender", Toast.LENGTH_SHORT).show();
-                }
-                if (weight.isEmpty()){
-                    textInputLayout_weightTdee.setError("Please fill the weight column");
-                }else {
-                    textInputLayout_weightTdee.setError("");
-                }
-                if (height.isEmpty()){
-                    textInputLayout_heightTdee.setError("Please fill the height column");
-                }else {
-                    textInputLayout_heightTdee.setError("");
-                }if (age.isEmpty()){
-                    textInputLayout_ageTdee.setError("Please fill the age column");
-                }else {
-                    textInputLayout_ageTdee.setError("");
-                }
-                resultTDEE = Math.round(nilaiTDEE);
-                loseTDEE = (int) (resultTDEE - (resultTDEE*0.2));
-                GainMinTDEE= resultTDEE+200;
-                GainMaxTDEE= resultTDEE+300;
 
-                String TDEE = String.valueOf(resultTDEE);
-                String WeightLoss = String.valueOf(loseTDEE);
-                String WeightGainMin = String.valueOf(GainMinTDEE);
-                String WeightGainMax = String.valueOf(GainMaxTDEE);
-                if (radioButton_male_tdee.isChecked() && !weight.isEmpty() && !height.isEmpty() && !age.isEmpty() || radioButton_female_tdee.isChecked() && !weight.isEmpty() && !height.isEmpty() && !age.isEmpty()){
+                if (radioButton_male_tdee.isChecked() || radioButton_female_tdee.isChecked() && !weight.isEmpty() && !height.isEmpty() && !age.isEmpty()){
+                    float nilaiact = CekActivity(act);
+                    float berat = Float.parseFloat(weight);
+                    float tinggi = Float.parseFloat(height);
+                    float umur = Float.parseFloat(age);
+                    float nilaiTDEE = 0;
+                    int resultTDEE;
+                    int loseTDEE;
+                    int GainMinTDEE;
+                    int GainMaxTDEE;
+
+                    if (radioButton_male_tdee.isChecked()){
+                        nilaiTDEE = (float) (66.5 + (berat * 13.7) + (5 * tinggi) - (6.8 * umur)) * nilaiact;
+                    }else if (radioButton_female_tdee.isChecked()){
+                        nilaiTDEE = (float) (655 + (9.6 * berat) + (1.8 * tinggi) - (4.7 * umur)* nilaiact);
+                    }
+                    resultTDEE = Math.round(nilaiTDEE);
+                    loseTDEE = (int) (resultTDEE - (resultTDEE*0.2));
+                    GainMinTDEE= resultTDEE+200;
+                    GainMaxTDEE= resultTDEE+300;
+
+                    String TDEE = String.valueOf(resultTDEE);
+                    String WeightLoss = String.valueOf(loseTDEE);
+                    String WeightGainMin = String.valueOf(GainMinTDEE);
+                    String WeightGainMax = String.valueOf(GainMaxTDEE);
+                    
                     Intent intent = new Intent(getBaseContext(), DiagnoseTdeeActivity.class);
                     intent.putExtra("TDEE", TDEE);
                     intent.putExtra("WeightLoss", WeightLoss);
@@ -98,6 +89,69 @@ public class TDEECalcActivity extends AppCompatActivity implements AdapterView.O
                 }else{
                     Toast.makeText(getApplicationContext(), "Please fill in all the data", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        textInputLayout_ageTdee.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String age = textInputLayout_ageTdee.getEditText().getText().toString().trim();
+                if (age.isEmpty()){
+                    textInputLayout_ageTdee.setError("Please fill the age column");
+                }else {
+                    textInputLayout_ageTdee.setError("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        textInputLayout_weightTdee.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String weight = textInputLayout_weightTdee.getEditText().getText().toString().trim();
+                if (weight.isEmpty()){
+                    textInputLayout_weightTdee.setError("Please fill the weight column");
+                }else {
+                    textInputLayout_weightTdee.setError("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        textInputLayout_heightTdee.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String height = textInputLayout_heightTdee.getEditText().getText().toString().trim();
+                if (height.isEmpty()){
+                    textInputLayout_heightTdee.setError("Please fill the height column");
+                }else {
+                    textInputLayout_heightTdee.setError("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
